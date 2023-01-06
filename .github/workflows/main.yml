@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Authenticate with GCP
-        uses: google-auth/setup-gcloud@v1
+  
         with:
           client-id: ${{ secrets.GCP_CLIENT_ID }}
           client-secret: ${{ secrets.GCP_CLIENT_SECRET }}
