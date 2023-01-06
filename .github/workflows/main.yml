@@ -1,25 +1,20 @@
-name: Create GCP VM
+name: Connect to GCP
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
-  create-vm:
+  connect-gcp:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Authenticate with GCP
-        uses: google-auth/setup-gcloud@v2
+        uses: google-auth/setup-gcloud@v1
         with:
           client-id: ${{ secrets.GCP_CLIENT_ID }}
           client-secret: ${{ secrets.GCP_CLIENT_SECRET }}
           scopes: "https://www.googleapis.com/auth/cloud-platform"
-      - name: Create VM
-        run: |
-          gcloud compute instances create example-vm \
-            --zone=us-central1-a \
-            --machine-type=n1-standard-1 \
-            --image-project=debian-cloud \
-            --image=debian-9-stretch-v20201210
+      - name: List GCP projects
+        run: gcloud projects list
